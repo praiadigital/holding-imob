@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Holding Imob — sua família precisa de uma holding?</title>
+<meta name="description" content="Avaliador de holding patrimonial para imóveis de temporada: economia de IR, ITCMD e proteção. Satélite da rede praia.digital">
+<style>
+body{margin:0;font-family:system-ui,sans-serif;background:#1c1917;color:#e7e5e4;min-height:100vh}
+header{padding:24px;text-align:center;background:linear-gradient(120deg,#44403c,#78716c)}
+nav a{color:#fbbf24;margin:0 8px;text-decoration:none;font-size:14px}
+.wrap{max-width:700px;margin:auto;padding:24px}
+.panel{background:#292524;border-radius:16px;padding:22px;margin-bottom:16px}
+label{display:block;margin:10px 0 4px;font-weight:600}
+input{width:100%;padding:12px;border-radius:10px;border:1px solid #44403c;background:#1c1917;color:#fff;font-size:16px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.col{border-radius:12px;padding:16px;text-align:center}
+.pf{background:#292524;border:1px solid #57534e}.pj{background:#052e16;border:1px solid #16a34a}
+.col b{display:block;font-size:20px;margin:5px 0;color:#fbbf24}
+#veredito{text-align:center;background:#052e16;border-radius:14px;padding:18px;font-size:17px;font-weight:700;margin-top:14px}
+.aviso{font-size:12px;color:#a8a29e;margin-top:10px}
+footer{padding:20px;text-align:center;font-size:13px;color:#a8a29e}
+footer a{color:#fbbf24}
+</style></head>
+<body>
+<header><h1>🏛️ Holding Imob</h1><p>Imóveis na PF ou na holding? A conta que rico nenhum te conta</p>
+<nav><a href="https://praia.digital">Praia Digital</a><a href="https://praia.digital/ir-temporada">IR Temporada</a><a href="https://praia.digital/investidores">Investidores</a><a href="https://praia.digital/apps">Todos os apps</a></nav></header>
+<div class="wrap"><div class="panel">
+<label>🏠 Patrimônio imobiliário total (R$)</label><input type="number" id="patr" value="2000000" oninput="calc()">
+<label>🛏️ Renda de locação mensal (R$)</label><input type="number" id="renda" value="12000" oninput="calc()">
+<label>👨‍👩‍👧 Nº de herdeiros</label><input type="number" id="herd" value="2" oninput="calc()">
+<div class="cols"><div class="col pf"><h3>👤 Pessoa Física</h3><div id="pfOut"></div></div><div class="col pj"><h3>🏛️ Holding</h3><div id="pjOut"></div></div></div>
+<div id="veredito"></div>
+<p class="aviso">⚖️ Simulação educativa simplificada. Holding envolve custos de constituição e contabilidade — consulte contador e advogado.</p></div>
+</div>
+<footer>Rede <a href="https://praia.digital">praia.digital</a> · <a href="https://praia.digital/fluxo-caixa">Fluxo de Caixa</a> · <a href="https://praia.digital/docs-imob">Docs Imob</a> · <a href="https://praia.digital/calculadora-custos">Calc. Custos</a></footer>
+<script>
+function fmt(v){return 'R$ '+Math.round(v).toLocaleString('pt-BR')}
+function calc(){
+const P=+patr.value,R=+renda.value*12,H=+herd.value;
+const irPF=R*0.275,irPJ=R*0.146;
+const itcmd=P*0.04;
+pfOut.innerHTML=`IR/ano (27,5%): <b>${fmt(irPF)}</b>ITCMD estimado: <b>${fmt(itcmd)}</b>`;
+pjOut.innerHTML=`IR/ano (~14,6% efetivo): <b>${fmt(irPJ)}</b>Sucessão planejada em vida: <b style="color:#4ade80">economia potencial</b>`;
+const econ=(irPF-irPJ);
+veredito.innerHTML=(P>=1500000&&R>=60000)?`🏛️ Holding tende a compensar: economia de ~${fmt(econ)}/ano em IR + sucessão protegida para ${H} herdeiro(s).`:`👤 No seu patrimônio atual, a PF ainda é simples e barata. Reavalie acima de ~R$ 1,5 mi ou ${fmt(5000)}/mês de renda. Economia estimada hoje: ${fmt(econ)}/ano.`;}
+calc();
+</script></body></html>
